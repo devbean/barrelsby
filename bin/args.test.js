@@ -25,6 +25,8 @@ describe("args module", () => {
             "barrel",
             "--structure",
             "filesystem",
+            "--exportNameType",
+            "*",
             "--verbose"
         ]);
         chai_1.assert.isUndefined(args.config);
@@ -44,10 +46,7 @@ describe("args module", () => {
     it("should handle legacy directory configuration options from yargs", () => {
         // Set up yargs.
         args_1.getArgs();
-        const args = yargs_1.default.parse([
-            "--config",
-            "./barrelsby-legacy-directory.json"
-        ]);
+        const args = yargs_1.default.parse(["--config", "./barrelsby-legacy-directory.json"]);
         chai_1.assert.isDefined(args.config);
         chai_1.assert.deepEqual(args.directory, ["test"]);
     });

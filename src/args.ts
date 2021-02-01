@@ -86,6 +86,12 @@ export function getArgs(): Yargs.Argv {
     .choices("s", ["flat", "filesystem"])
     .default("s", "flat")
 
+    .string("t")
+    .alias("t", "exportNameType")
+    .describe("t", "The exported names type for barrel file")
+    .choices("t", ["*", "name"])
+    .default("t", "*")
+
     .boolean("q")
     .alias("q", "singleQuotes")
     .describe(

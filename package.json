@@ -1,6 +1,6 @@
 {
-  "name": "barrelsby",
-  "version": "2.2.0",
+  "name": "@cube/barrelsby",
+  "version": "1.0.0",
   "description": "Automatic TypeScript barrels for your entire code base",
   "main": "index.js",
   "scripts": {
@@ -68,6 +68,7 @@
   },
   "dependencies": {
     "@types/yargs": "^13.0.3",
+    "ts-morph": "^9.1.0",
     "yargs": "^14.2.0"
   },
   "contributors": [
@@ -79,5 +80,8 @@
   ],
   "engines": {
     "node": ">=6.0.0"
+  },
+  "publishConfig": {
+    "registry": "http://192.168.88.19:8081/repository/npm-huiwen/"
   }
 }

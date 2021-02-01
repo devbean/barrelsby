@@ -6,6 +6,7 @@ import { buildFlatBarrel } from "./builders/flat";
 import { addHeaderPrefix } from "./builders/header";
 import { loadDirectoryModules } from "./modules";
 import { BaseUrl } from "./options/baseUrl";
+import { ExportNameType } from "./options/exportNameType";
 import { Logger } from "./options/logger";
 import { SemicolonCharacter } from "./options/noSemicolon";
 import { StructureOption } from "./options/options";
@@ -22,6 +23,7 @@ export function buildBarrels(
   quoteCharacter: QuoteCharacter,
   semicolonCharacter: SemicolonCharacter,
   barrelName: string,
+  exportNameType: ExportNameType,
   logger: Logger,
   baseUrl: BaseUrl,
   exportDefault: boolean,
@@ -41,21 +43,22 @@ export function buildBarrels(
       break;
   }
   // Build the barrels.
-  destinations.forEach((destination: Directory) =>
+  destinations.forEach((destination: Directory) => {
     buildBarrel(
       destination,
       builder,
       quoteCharacter,
       semicolonCharacter,
       barrelName,
+      exportNameType,
       logger,
       baseUrl,
       exportDefault,
       local,
       include,
       exclude
-    )
-  );
+    );
+  });
 }
 
 // Build a barrel for the specified directory.
@@ -65,6 +68,7 @@ function buildBarrel(
   quoteCharacter: QuoteCharacter,
   semicolonCharacter: SemicolonCharacter,
   barrelName: string,
+  exportNameType: ExportNameType,
   logger: Logger,
   baseUrl: BaseUrl,
   exportDefault: boolean,
@@ -78,6 +82,7 @@ function buildBarrel(
     loadDirectoryModules(directory, logger, include, exclude, local),
     quoteCharacter,
     semicolonCharacter,
+    exportNameType,
     logger,
     baseUrl,
     exportDefault
@@ -108,6 +113,7 @@ export type BarrelBuilder = (
   modules: Location[],
   quoteCharacter: QuoteCharacter,
   semicolonCharacter: SemicolonCharacter,
+  exportNameType: ExportNameType,
   logger: Logger,
   baseUrl: BaseUrl,
   exportDefault: boolean

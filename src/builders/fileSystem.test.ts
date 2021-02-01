@@ -13,6 +13,7 @@ describe("builder/fileSystem module has a", () => {
           TestUtilities.mockModules(rootDirectory),
           '"',
           ";",
+          "*",
           logger,
           undefined
         );
@@ -55,6 +56,7 @@ export {indexts as index};
         TestUtilities.mockModules(rootDirectory),
         "'",
         ";",
+        "*",
         logger,
         undefined
       );
@@ -96,6 +98,7 @@ export {indexts as index};
         TestUtilities.mockModules(rootDirectory),
         '"',
         "",
+        "*",
         logger,
         undefined
       );

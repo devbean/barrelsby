@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getArgs = void 0;
 const fs_1 = __importDefault(require("fs"));
 const yargs_1 = __importDefault(require("yargs"));
 const configParser = (configPath) => {
@@ -62,6 +63,11 @@ function getArgs() {
         .describe("s", "The mode for structuring barrel file exports")
         .choices("s", ["flat", "filesystem"])
         .default("s", "flat")
+        .string("t")
+        .alias("t", "exportNameType")
+        .describe("t", "The exported names type for barrel file")
+        .choices("t", ["*", "name"])
+        .default("t", "*")
         .boolean("q")
         .alias("q", "singleQuotes")
         .describe("q", "Use single quotes for paths instead of the default double quotes")

@@ -19,6 +19,7 @@ describe("builder/flat module has a", () => {
           TestUtilities.mockModules(directory),
           '"',
           ";",
+          "*",
           logger,
           undefined,
           false
@@ -69,6 +70,7 @@ export * from "./directory3/program";
           TestUtilities.mockModules(directory),
           "'",
           ";",
+          "*",
           logger,
           undefined,
           false
@@ -119,6 +121,7 @@ export * from './directory3/program';
           TestUtilities.mockModules(directory),
           '"',
           "",
+          "*",
           logger,
           undefined,
           false
@@ -166,6 +169,7 @@ export * from "./directory3/program"
           TestUtilities.mockModules(directory),
           '"',
           ";",
+          "*",
           logger,
           undefined,
           true
@@ -194,5 +198,56 @@ export * from "./directory3/program";
         TestUtilities.tslint(output, '"');
       });
     });
+
+    //     describe("when using exported names", () => {
+    //       let output: string;
+    //       let spySandbox: sinon.SinonSandbox;
+    //       let logger: Sinon.SinonSpy;
+    //       beforeEach(() => {
+    //         const directory = TestUtilities.mockDirectoryTree();
+    //         spySandbox = Sinon.createSandbox();
+    //         logger = spySandbox.spy();
+    //         output = Flat.buildFlatBarrel(
+    //           directory,
+    //           TestUtilities.mockModules(directory),
+    //           "'",
+    //           ";",
+    //           "name",
+    //           logger,
+    //           undefined,
+    //           false
+    //         );
+    //       });
+    //       afterEach(() => {
+    //         spySandbox.restore();
+    //       });
+    //       it("should produce the correct output", () => {
+    //         TestUtilities.assertMultiLine(
+    //           output,
+    //           `export * from './barrel';
+    // export * from './index';
+    // export * from './directory2/script';
+    // export * from './directory2/directory4/deeplyNested';
+    // export * from './directory3/program';
+    // `
+    //         );
+    //       });
+    //       it("should log useful information to the logger", () => {
+    //         const messages = [
+    //           "Including path ./barrel",
+    //           "Including path ./index",
+    //           "Including path ./directory2/script",
+    //           "Including path ./directory2/directory4/deeplyNested",
+    //           "Including path ./directory3/program"
+    //         ];
+    //         assert.equal(logger.callCount, messages.length);
+    //         messages.forEach((message: string, index: number) => {
+    //           assert.equal(logger.getCall(index).args[0], message);
+    //         });
+    //       });
+    //       it("should produce output compatible with the recommended tslint ruleset", () => {
+    //         TestUtilities.tslint(output, "'");
+    //       });
+    //     });
   });
 });

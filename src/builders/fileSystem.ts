@@ -2,6 +2,7 @@ import path from "path";
 
 import { buildImportPath } from "../builder";
 import { BaseUrl } from "../options/baseUrl";
+import { ExportNameType } from "../options/exportNameType";
 import { Logger } from "../options/logger";
 import { SemicolonCharacter } from "../options/noSemicolon";
 import { QuoteCharacter } from "../options/quoteCharacter";
@@ -73,6 +74,7 @@ export function buildFileSystemBarrel(
   modules: Location[],
   quoteCharacter: QuoteCharacter,
   semicolonCharacter: SemicolonCharacter,
+  _1: ExportNameType,
   _: Logger, // Not used
   baseUrl: BaseUrl
 ): string {

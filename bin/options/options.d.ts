@@ -1,3 +1,4 @@
+import { ExportNameType } from "./exportNameType";
 export declare type LocationOption = "top" | "below" | "all" | "replace" | "branch";
 export declare type StructureOption = "flat" | "filesystem";
 export interface Arguments {
@@ -7,6 +8,7 @@ export interface Arguments {
     delete?: boolean;
     exclude?: string[];
     exportDefault?: boolean;
+    exportNameType?: ExportNameType;
     help?: boolean;
     include?: string[];
     local?: boolean;

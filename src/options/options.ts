@@ -1,3 +1,5 @@
+import { ExportNameType } from "./exportNameType";
+
 export type LocationOption = "top" | "below" | "all" | "replace" | "branch";
 
 export type StructureOption = "flat" | "filesystem";
@@ -10,6 +12,7 @@ export interface Arguments {
   delete?: boolean;
   exclude?: string[];
   exportDefault?: boolean;
+  exportNameType?: ExportNameType;
   help?: boolean;
   include?: string[];
   local?: boolean;

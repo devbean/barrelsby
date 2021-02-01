@@ -22,7 +22,7 @@ function main(args: Arguments) {
   const barrelName = getBarrelName(args.name as string, logger);
   const directories = args.directory || ["./"];
 
-  directories.forEach((directory) => {
+  directories.forEach(directory => {
     const rootPath = resolveRootPath(directory);
     const baseUrl = getCombinedBaseUrl(rootPath, args.baseUrl);
 
@@ -38,16 +38,24 @@ function main(args: Arguments) {
     );
 
     // Potentially there are some existing barrels that need removing.
-    purge(rootTree, args.delete !== undefined && args.delete, barrelName, logger);
+    purge(
+      rootTree,
+      args.delete !== undefined && args.delete,
+      barrelName,
+      logger
+    );
 
     // Create the barrels.
     const quoteCharacter = getQuoteCharacter(args.singleQuotes as boolean);
-    const semicolonCharacter = getSemicolonCharacter(args.noSemicolon as boolean);
+    const semicolonCharacter = getSemicolonCharacter(
+      args.noSemicolon as boolean
+    );
     buildBarrels(
       destinations,
       quoteCharacter,
       semicolonCharacter,
       barrelName,
+      args.exportNameType ? args.exportNameType : "*",
       logger,
       baseUrl,
       !!args.exportDefault,

@@ -20,7 +20,9 @@ Promise.all(
     .filter(path => lstatSync(path).isDirectory())
     .map(directory => {
       const args = Yargs.parse(["--config", join(directory, "barrelsby.json")]);
-      args.directory = join(directory, args.directory as string);
+      args.directory = (args.directory as string[]).map(it => {
+        return join(directory, it);
+      });
       return copy(join(directory, "input"), join(directory, "output")).then(
         () => {
           Barrelsby(args as any);

@@ -1,13 +1,25 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const chai_1 = require("chai");
@@ -24,7 +36,7 @@ describe("builder/flat module has a", () => {
                 const directory = TestUtilities.mockDirectoryTree();
                 spySandbox = sinon_1.default.createSandbox();
                 logger = spySandbox.spy();
-                output = Flat.buildFlatBarrel(directory, TestUtilities.mockModules(directory), '"', ";", logger, undefined, false);
+                output = Flat.buildFlatBarrel(directory, TestUtilities.mockModules(directory), '"', ";", "*", logger, undefined, false);
             });
             afterEach(() => {
                 spySandbox.restore();
@@ -62,7 +74,7 @@ export * from "./directory3/program";
                 const directory = TestUtilities.mockDirectoryTree();
                 spySandbox = sinon_1.default.createSandbox();
                 logger = spySandbox.spy();
-                output = Flat.buildFlatBarrel(directory, TestUtilities.mockModules(directory), "'", ";", logger, undefined, false);
+                output = Flat.buildFlatBarrel(directory, TestUtilities.mockModules(directory), "'", ";", "*", logger, undefined, false);
             });
             afterEach(() => {
                 spySandbox.restore();
@@ -100,7 +112,7 @@ export * from './directory3/program';
                 const directory = TestUtilities.mockDirectoryTree();
                 spySandbox = sinon_1.default.createSandbox();
                 logger = spySandbox.spy();
-                output = Flat.buildFlatBarrel(directory, TestUtilities.mockModules(directory), '"', "", logger, undefined, false);
+                output = Flat.buildFlatBarrel(directory, TestUtilities.mockModules(directory), '"', "", "*", logger, undefined, false);
             });
             afterEach(() => {
                 spySandbox.restore();
@@ -135,7 +147,7 @@ export * from "./directory3/program"
                 const directory = TestUtilities.mockDirectoryTree();
                 spySandbox = sinon_1.default.createSandbox();
                 logger = spySandbox.spy();
-                output = Flat.buildFlatBarrel(directory, TestUtilities.mockModules(directory), '"', ";", logger, undefined, true);
+                output = Flat.buildFlatBarrel(directory, TestUtilities.mockModules(directory), '"', ";", "*", logger, undefined, true);
             });
             afterEach(() => {
                 spySandbox.restore();
@@ -157,6 +169,56 @@ export * from "./directory3/program";
                 TestUtilities.tslint(output, '"');
             });
         });
+        //     describe("when using exported names", () => {
+        //       let output: string;
+        //       let spySandbox: sinon.SinonSandbox;
+        //       let logger: Sinon.SinonSpy;
+        //       beforeEach(() => {
+        //         const directory = TestUtilities.mockDirectoryTree();
+        //         spySandbox = Sinon.createSandbox();
+        //         logger = spySandbox.spy();
+        //         output = Flat.buildFlatBarrel(
+        //           directory,
+        //           TestUtilities.mockModules(directory),
+        //           "'",
+        //           ";",
+        //           "name",
+        //           logger,
+        //           undefined,
+        //           false
+        //         );
+        //       });
+        //       afterEach(() => {
+        //         spySandbox.restore();
+        //       });
+        //       it("should produce the correct output", () => {
+        //         TestUtilities.assertMultiLine(
+        //           output,
+        //           `export * from './barrel';
+        // export * from './index';
+        // export * from './directory2/script';
+        // export * from './directory2/directory4/deeplyNested';
+        // export * from './directory3/program';
+        // `
+        //         );
+        //       });
+        //       it("should log useful information to the logger", () => {
+        //         const messages = [
+        //           "Including path ./barrel",
+        //           "Including path ./index",
+        //           "Including path ./directory2/script",
+        //           "Including path ./directory2/directory4/deeplyNested",
+        //           "Including path ./directory3/program"
+        //         ];
+        //         assert.equal(logger.callCount, messages.length);
+        //         messages.forEach((message: string, index: number) => {
+        //           assert.equal(logger.getCall(index).args[0], message);
+        //         });
+        //       });
+        //       it("should produce output compatible with the recommended tslint ruleset", () => {
+        //         TestUtilities.tslint(output, "'");
+        //       });
+        //     });
     });
 });
 //# sourceMappingURL=flat.test.js.map
